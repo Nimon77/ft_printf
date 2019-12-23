@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 15:47:30 by nsimon            #+#    #+#             */
-/*   Updated: 2019/12/19 15:26:24 by nsimon           ###   ########.fr       */
+/*   Updated: 2019/12/23 18:17:03 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/libftprintf.h"
@@ -48,11 +48,20 @@ static char	*ft_itoa_unsigned(unsigned int n)
 	return (value);
 }
 
-void	ft_printf_uint(unsigned int n)
+void	ft_uint(unsigned int n, t_fill_list *fill)
 {
-	char	*value;
+	size_t			i;
+	char			*value;
 
 	value = ft_itoa_unsigned(n);
+	if ((i = ft_strlen(value) + (fill->zero - ft_strlen(value))) < fill->space)
+		while (i++ < fill->space)
+			ft_putchar_fd(' ', 1);
+	if ((i = ft_strlen(value)) < fill->zero)
+		while (i++ < fill->zero)
+			ft_putchar_fd('0', 1);
+	fill->space = 0;
+	fill->zero = 0;
 	ft_putstr_fd(value, 1);
 	free(value);
 }

@@ -6,23 +6,40 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2019/12/18 15:47:24 by nsimon           ###   ########.fr       */
+/*   Updated: 2019/12/23 18:18:51 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libftprintf.h"
 
-void	ft_printf_int(int value)
+void	ft_printf_int(int val, t_fill_list *fill)
 {
-	char	*val;
+	size_t	i;
+	char	*value;
 
-	val = ft_itoa(value);
-	ft_putstr_fd(val, 1);
-	free(val);
+	value = ft_itoa(val);
+	if ((i = ft_strlen(value) + (fill->zero - ft_strlen(value))) < fill->space)
+		while (i++ < fill->space)
+			ft_putchar_fd(' ', 1);
+	if ((i = ft_strlen(value)) < fill->zero)
+		while (i++ < fill->zero)
+			ft_putchar_fd('0', 1);
+	fill->space = 0;
+	fill->zero = 0;
+	ft_putstr_fd(value, 1);
+	free(value);
 }
 
-void	ft_printf_char(char c)
+void	ft_printf_char(char c, t_fill_list *fill)
 {
+	size_t	i;
+
+	i = 1;
+	if (i < fill->space)
+		while (i++ < fill->space)
+			ft_putchar_fd(' ', 1);
+	fill->space = 0;
+	fill->space = 0;
 	ft_putchar_fd(c, 1);
 }
 

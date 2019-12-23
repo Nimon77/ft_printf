@@ -4,7 +4,9 @@ int main()
 {
 	unsigned int uint = 4294967295;
 
-	printf("%0.6d%c%s%u\n", 12, 'z', "Bonjour, c'est un test", uint);
-	ft_printf("%d%c%s%u\n", 12, 'z', "Bonjour, c'est un test", uint);
+	printf("%12.3d %5.c %s %13.12u\n", 12, 'z', "Bonjour, c'est un test",
+			uint);
+	ft_printf("%12.3d %5.c %s %13.12u\n", 12, 'z', "Bonjour, c'est un test",
+			uint);
 	return 0;
 }
