@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2019/12/23 18:15:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2019/12/24 16:38:58 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_printf(const char *format, ...)
 			val == 5 ? ft_uint(va_arg(args, unsigned int), &fill) : val;
 			i += j + 1;
 		}
-		if (format[i] != '%')
+		if (format[i] != '%' && format[i])
 			ft_putchar_fd(format[i++], 1);
 	}
 	va_end(args);

@@ -6,7 +6,7 @@ int main()
 
 	printf("%12.3d %c %s %13.12u\n", 12, 'z', "Bonjour, c'est un test",
 			uint);
-	ft_printf("%12.3d %c %s %13.12u\n", 12, 'z', "Bonjour, c'est un test",
+	ft_printf("%12.3d %c %s %13.12u", 12, 'z', "Bonjour, c'est un test",
 			uint);
 	return 0;
 }
