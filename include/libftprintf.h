@@ -27,6 +27,7 @@ typedef struct	s_fill_list
 void	ft_printf_int(int value, t_fill_list *fill);
 void	ft_printf_char(char c, t_fill_list *fill);
 void	ft_printf_str(char *str);
+void	ft_pointer(void *ptr, t_fill_list *fill);
 void	ft_uint(unsigned int val, t_fill_list *fill);
 int		ft_printf(const char *, ...);
 

@@ -6,11 +6,11 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2019/12/24 16:38:58 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/03 21:40:01 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libftprintf.h"
+#include "libftprintf.h"
 
 int	is_flag(const char format)
 {
@@ -61,6 +61,7 @@ int	ft_printf(const char *format, ...)
 		{
 			val == 1 ? ft_printf_char(va_arg(args, int), &fill) : val;
 			val == 2 ? ft_printf_str(va_arg(args, char *)) : val;
+			val == 3 ? ft_pointer(va_arg(args, void *), &fill) : val;
 			val == 4 ? ft_printf_int(va_arg(args, int), &fill) : val;
 			val == 5 ? ft_uint(va_arg(args, unsigned int), &fill) : val;
 			i += j + 1;
