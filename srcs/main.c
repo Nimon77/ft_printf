@@ -3,8 +3,10 @@
 int main()
 {
 	unsigned int uint = 4294967295;
+	char	*test;
 
-	printf("%p\n", &uint);
-	ft_printf("%p", &uint);
+	test = (char *)malloc(sizeof(test));
+	printf("%p\t%p\n", &uint, &test);
+	ft_printf("%p\t%p", &uint, &test);
 	return 0;
 }
