@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:09:35 by nsimon            #+#    #+#             */
-/*   Updated: 2019/12/23 18:15:14 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/04 02:07:49 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../libft/libft.h"
 #include <stdio.h>
 
+#include <inttypes.h>
 #include <stdarg.h>
 
 typedef struct	s_fill_list

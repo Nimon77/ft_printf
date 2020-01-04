@@ -6,12 +6,11 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 21:34:23 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/04 00:24:30 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/04 02:27:44 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <inttypes.h>
 
 static char *ft_reverse(char *conv)
 {
@@ -56,11 +55,16 @@ void	ft_pointer(void *ptr, t_fill_list *fill)
 	long test;
 	char *conv;
 
-	test = (uintptr_t)ptr;
-	ft_putstr_fd("0x", 1);
-	conv = convert_hex(test);
-	ft_putstr_fd(conv, 1);
-	free(conv);
+	if (ptr)
+	{
+		test = (uintptr_t) ptr;
+		ft_putstr_fd("0x", 1);
+		conv = convert_hex(test);
+		ft_putstr_fd(conv, 1);
+		free(conv);
+	}
+	else
+		ft_putstr_fd("(nil)", 1);
 	fill->space = 0;
 	fill->zero = 0;
 }
