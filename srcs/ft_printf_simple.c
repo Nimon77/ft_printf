@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/04 03:06:46 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/24 15:53:30 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@ void	ft_printf_int(int val, t_fill_list *fill)
 	char	*value;
 
 	value = ft_itoa(val);
-	if ((i = ft_strlen(value) + (fill->zero - ft_strlen(value))) < fill->space)
+	i = ft_strlen(value) + fill->zero;
+	if (fill->align != '-' && i < fill->space + fill->zero)
 		while (i++ < fill->space)
 			ft_putchar_fd(' ', 1);
-	if ((i = ft_strlen(value)) < fill->zero)
+	if (i - fill->zero < fill->zero)
 		while (i++ < fill->zero)
 			ft_putchar_fd('0', 1);
+	ft_putstr_fd(value, 1);
+	if (fill->align == '-' && i < fill->space)
+		while (i++ < fill->space)
+			ft_putchar_fd(' ', 1);
 	fill->space = 0;
 	fill->zero = 0;
-	ft_putstr_fd(value, 1);
 	free(value);
 }
 
@@ -35,17 +39,36 @@ void	ft_printf_char(char c, t_fill_list *fill)
 	size_t	i;
 
 	i = 1;
-	if (i < fill->space)
+	if (fill->align != '-' && i < fill->space)
+		while (i++ < fill->space)
+			ft_putchar_fd(' ', 1);
+	ft_putchar_fd(c, 1);
+	if (fill ->align == '-' && i < fill->space)
 		while (i++ < fill->space)
 			ft_putchar_fd(' ', 1);
 	fill->space = 0;
 	fill->space = 0;
-	ft_putchar_fd(c, 1);
 }
 
-void	ft_printf_str(char *str)
+void	ft_printf_str(const char *str, t_fill_list * fill)
 {
-	ft_putstr_fd(str, 1);
+	char 	*cpy_str;
+	size_t	i;
+
+	i = 0;
+	cpy_str = ft_strdup(str);
+	if (fill->zero < ft_strlen(cpy_str))
+		cpy_str[fill->zero] = '\0';
+	if (fill->align != '-')
+		while (i++ < fill->space - fill->zero)
+			ft_putchar_fd(' ', 1);
+	ft_putstr_fd(cpy_str, 1);
+	if (fill->align == '-')
+		while (i++ < fill->space - fill->zero)
+			ft_putchar_fd(' ', 1);
+	free(cpy_str);
+	fill->space = 0;
+	fill->zero = 0;
 }
 
 void	ft_hexa(int value, t_fill_list *fill, char charset)

@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/04 02:48:28 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/24 14:42:10 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ int	ft_printf(const char *format, ...)
 	{
 		j = 1;
 		if (format[i] == '%')
-			while (ft_isdigit(format[i + j]) || format[i + j] == '.')
+			while (ft_isdigit(format[i + j]) || format[i + j] == '.' ||
+			format[i + j] == '-')
 			{
+				if (format[i + j] == '-')
+					fill.align = '-';
 				if (!ft_isdigit(format[i + j - 1]) && format[i + j - 1] != '.')
 					fill.space = ft_atoi(&format[i + j]);
 				if (!ft_isdigit(format[i + j - 1]) && format[i + j - 1] == '.')
@@ -60,7 +63,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%' && (val = is_flag(format[i + j])))
 		{
 			val == 1 ? ft_printf_char(va_arg(args, int), &fill) : val;
-			val == 2 ? ft_printf_str(va_arg(args, char *)) : val;
+			val == 2 ? ft_printf_str(va_arg(args, char *), &fill) : val;
 			val == 3 ? ft_pointer(va_arg(args, void *), &fill) : val;
 			val == 4 ? ft_printf_int(va_arg(args, int), &fill) : val;
 			val == 5 ? ft_uint(va_arg(args, unsigned int), &fill) : val;

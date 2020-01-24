@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 02:40:21 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/04 03:04:18 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/24 15:36:33 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,19 @@ static char *ft_reverse(char *conv)
 		return (NULL);
 	while (size >= 0)
 		tmp[i++] = conv[size--];
+	tmp[i] = '\0';
 	free(conv);
 	return (tmp);
 }
 
-char	*convert_hex(long value, char charset)
+char	*convert_hex(unsigned long value, char charset)
 {
 	int		val;
 	char	actuel[2];
 	char	*conv;
 	char	*tmp;
 
-	if (!(conv = (char *)malloc(sizeof(conv))))
+	if (!(conv = (char *)malloc(sizeof(*conv))))
 		return (NULL);
 	conv[0] = '\0';
 	actuel[1] = '\0';
@@ -45,9 +46,15 @@ char	*convert_hex(long value, char charset)
 		actuel[0] = (char)(val > 9 ? (val + charset) : (val + '0'));
 		tmp = conv;
 		conv = ft_strjoin(conv, actuel);
-		if (tmp)
-			free(tmp);
+		free(tmp);
 		value /= 16;
+	}
+	if (ft_strlen(conv) == 0)
+	{
+		actuel[0] = '0';
+		tmp = conv;
+		conv = ft_strjoin(conv, actuel);
+		free(tmp);
 	}
 	return (ft_reverse(conv));
 }
