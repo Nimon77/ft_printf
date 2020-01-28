@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/24 15:53:30 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/28 16:11:19 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,31 @@
 void	ft_printf_int(int val, t_fill_list *fill)
 {
 	size_t	i;
+	int		j;
 	char	*value;
 
 	value = ft_itoa(val);
-	i = ft_strlen(value) + fill->zero;
-	if (fill->align != '-' && i < fill->space + fill->zero)
-		while (i++ < fill->space)
+	i = ft_strlen(value);
+	j = (int)(fill->zero - ft_strlen(value));
+	if (fill->align != '-')
+		while (i++ < fill->space - (j < 0 ? 0 : j))
+		{
 			ft_putchar_fd(' ', 1);
-	if (i - fill->zero < fill->zero)
-		while (i++ < fill->zero)
-			ft_putchar_fd('0', 1);
+			fill->printed++;
+		}
+	i = 0;
+	while (i++ < (size_t)(j < 0 ? 0 : j))
+		ft_putchar_fd('0', 1);
+	fill->printed += i;
 	ft_putstr_fd(value, 1);
-	if (fill->align == '-' && i < fill->space)
+	fill->printed += ft_strlen(value);
+	i += ft_strlen(value) - 1;
+	if (fill->align == '-')
 		while (i++ < fill->space)
+		{
 			ft_putchar_fd(' ', 1);
+			fill->printed++;
+		}
 	fill->space = 0;
 	fill->zero = 0;
 	free(value);

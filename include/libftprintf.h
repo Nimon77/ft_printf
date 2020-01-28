@@ -21,6 +21,7 @@
 typedef struct	s_fill_list
 {
 	char 		align;
+	int			printed;
 	size_t		space;
 	size_t		zero;
 }				t_fill_list;

@@ -45,6 +45,7 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	fill.zero = 0;
 	fill.space = 0;
+	fill.printed = 0;
 	while (format[i])
 	{
 		j = 1;
@@ -72,8 +73,11 @@ int	ft_printf(const char *format, ...)
 			i += j + 1;
 		}
 		if (format[i] != '%' && format[i])
+		{
 			ft_putchar_fd(format[i++], 1);
+			fill.printed++;
+		}
 	}
 	va_end(args);
-	return (0);
+	return (fill.printed);
 }
