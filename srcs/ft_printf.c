@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/24 14:42:10 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:13:45 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_printf(const char *format, ...)
 	int 		j;
 	int			val;
 	va_list		args;
-	t_fill_list	fill;
+	t_fill	fill;
 
 	va_start(args, format);
 	i = 0;
@@ -74,8 +74,7 @@ int	ft_printf(const char *format, ...)
 		}
 		if (format[i] != '%' && format[i])
 		{
-			ft_putchar_fd(format[i++], 1);
-			fill.printed++;
+			ft_putchar_count(format[i++], &fill);
 		}
 	}
 	va_end(args);

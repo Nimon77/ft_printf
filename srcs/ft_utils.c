@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_pointer.c                                :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/03 21:34:23 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/24 15:24:33 by nsimon           ###   ########.fr       */
+/*   Created: 2020/01/29 14:03:48 by nsimon            #+#    #+#             */
+/*   Updated: 2020/01/29 14:07:25 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_pointer(void *ptr, t_fill *fill)
+void	ft_putchar_count(char c, t_fill *fill)
 {
-	unsigned long	test;
-	char			*conv;
-	size_t	i;
+	ft_putchar_fd(c, 1);
+	fill->printed++;
+}
 
-	test = ptr ? (uintptr_t)ptr : 0;
-	conv = convert_hex(test, 87);
-	i = ft_strlen(conv) + 2;
-	if (fill->align != '-')
-		while (i++ < fill->space)
-			ft_putchar_fd(' ', 1);
-	ft_putstr_fd("0x", 1);
-	ft_putstr_fd(conv, 1);
-	if (fill->align == '-')
-		while (i++ < fill->space)
-			ft_putchar_fd(' ', 1);
-	free(conv);
-	fill->space = 0;
-	fill->zero = 0;
+void	ft_putstr_count(char *str, t_fill *fill)
+{
+	ft_putstr_fd(str, 1);
+	fill->printed += ft_strlen(str);
 }
