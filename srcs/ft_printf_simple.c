@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/29 14:14:04 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/29 16:56:39 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ void	ft_printf_int(int val, t_fill *fill)
 	value = ft_itoa(val);
 	i = ft_strlen(value);
 	j = (int)(fill->zero - ft_strlen(value));
-	if (fill->align != '-')
+	if (fill->align == '\0')
 		while (i++ < fill->space - (j < 0 ? 0 : j))
 			ft_putchar_count(' ', fill);
+	if (fill->align == '0')
+		while (i++ < fill->space - (j < 0 ? 0 : j))
+			ft_putchar_count('0', fill);
 	i = 0;
 	while (i++ < (size_t)(j < 0 ? 0 : j))
 		ft_putchar_count('0', fill);
@@ -44,18 +47,11 @@ void	ft_printf_char(char c, t_fill *fill)
 	i = 1;
 	if (fill->align != '-' && i < fill->space)
 		while (i++ < fill->space)
-		{
 			ft_putchar_count(' ', fill);
-			fill->printed++;
-		}
 	ft_putchar_count(c, fill);
-	fill->printed++;
 	if (fill ->align == '-' && i < fill->space)
 		while (i++ < fill->space)
-		{
 			ft_putchar_count(' ', fill);
-			fill->printed++;
-		}
 	fill->space = 0;
 	fill->space = 0;
 }

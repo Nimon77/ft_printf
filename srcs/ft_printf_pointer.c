@@ -23,12 +23,12 @@ void	ft_pointer(void *ptr, t_fill *fill)
 	i = ft_strlen(conv) + 2;
 	if (fill->align != '-')
 		while (i++ < fill->space)
-			ft_putchar_fd(' ', 1);
-	ft_putstr_fd("0x", 1);
-	ft_putstr_fd(conv, 1);
+			ft_putchar_count(' ', fill);
+	ft_putstr_count("0x", fill);
+	ft_putstr_count(conv, fill);
 	if (fill->align == '-')
 		while (i++ < fill->space)
-			ft_putchar_fd(' ', 1);
+			ft_putchar_count(' ', fill);
 	free(conv);
 	fill->space = 0;
 	fill->zero = 0;

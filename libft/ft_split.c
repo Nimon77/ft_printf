@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 14:17:18 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/14 14:02:21 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/29 17:44:02 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	**error(char **split, int nb_split)
 	}
 	free(split);
 	split = NULL;
-	return (split);
+	return (NULL);
 }
 
 char		**ft_split(const char *s, char c)

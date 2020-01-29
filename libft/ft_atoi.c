@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 10:10:46 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/14 14:02:20 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/29 17:44:02 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	get_return(unsigned long long ret, int neg, const char *str)
 	if (ret > 9223372036854775807)
 		return (neg == -1 ? 0 : -1);
 	else
-		return ((int)(ret * neg));
+		return (ret * neg);
 }
 
 int			ft_atoi(const char *str)

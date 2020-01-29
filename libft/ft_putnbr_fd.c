@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 10:01:32 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/14 14:02:21 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/29 17:44:02 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_putnbr_fd(int n, int fd)
 	i = 0;
 	while (n != 0)
 	{
-		if ((tmp[i] = (char)(n % 10)) < 0)
-			tmp[i] = (char)(-tmp[i] + '0');
+		if ((tmp[i] = (n % 10)) < 0)
+			tmp[i] = -tmp[i] + '0';
 		else
 			tmp[i] += '0';
 		i++;

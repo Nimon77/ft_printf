@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:05:42 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/14 14:02:20 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/29 17:44:02 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_strrcpy(char *value, char *tmp)
 	int	j;
 
 	j = 0;
-	i = (int)ft_strlen(tmp) - 1;
+	i = ft_strlen(tmp) - 1;
 	while (i >= 0)
 		value[j++] = tmp[i--];
 	value[j] = '\0';
@@ -33,8 +33,8 @@ char		*ft_itoa(int n)
 	i = 0;
 	while (n != 0)
 	{
-		if ((tmp[i] = (char)(n % 10)) < 0)
-			tmp[i] = (char)(-tmp[i] + '0');
+		if ((tmp[i] = (n % 10)) < 0)
+			tmp[i] = -tmp[i] + '0';
 		else
 			tmp[i] += '0';
 		i++;

@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/29 14:13:45 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/29 18:10:44 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,26 @@ int	is_flag(const char format)
 	return (0);
 }
 
+int	ft_getprec(const char *str, t_fill *fill)
+{
+	int	i;
+
+	i = 1;
+	while (ft_isdigit(str[i]) || str[i] == '.' || str[i] == '-')
+	{
+		if (str[i] == '-' || (str[i] == '0' && str[i - 1] == '%'))
+			fill->align = str[i];
+		if (!ft_isdigit(str[i - 1]) && str[i - 1] != '.')
+			fill->space = ft_atoi(&str[i]);
+		if (!ft_isdigit(str[i - 1]) && str[i - 1] == '.')
+			fill->zero = ft_atoi(&str[i]);
+		if (str[i] == '.' && fill->align == '0')
+			fill->align = '\0';
+		i++;
+	}
+	return (i);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	int			i;
@@ -48,19 +68,9 @@ int	ft_printf(const char *format, ...)
 	fill.printed = 0;
 	while (format[i])
 	{
-		j = 1;
+		j = 0;
 		if (format[i] == '%')
-			while (ft_isdigit(format[i + j]) || format[i + j] == '.' ||
-			format[i + j] == '-')
-			{
-				if (format[i + j] == '-')
-					fill.align = '-';
-				if (!ft_isdigit(format[i + j - 1]) && format[i + j - 1] != '.')
-					fill.space = ft_atoi(&format[i + j]);
-				if (!ft_isdigit(format[i + j - 1]) && format[i + j - 1] == '.')
-					fill.zero = ft_atoi(&format[i + j]);
-				j++;
-			}
+			j = ft_getprec(&format[i], &fill);
 		if (format[i] == '%' && (val = is_flag(format[i + j])))
 		{
 			val == 1 ? ft_printf_char(va_arg(args, int), &fill) : val;
@@ -73,9 +83,7 @@ int	ft_printf(const char *format, ...)
 			i += j + 1;
 		}
 		if (format[i] != '%' && format[i])
-		{
 			ft_putchar_count(format[i++], &fill);
-		}
 	}
 	va_end(args);
 	return (fill.printed);
