@@ -7,8 +7,8 @@ int main()
 	char	*test;
 
 	test = (char *)malloc(sizeof(*test));
-	printf("\t%d\n", printf("-%5c-", 'a'));
-	printf("\t%d\n", ft_printf("-%5c-", 'a'));
+	printf("\t%d\n", printf("-%.*d-", -5, 'a'));
+	printf("\t%d\n", ft_printf("-%.*d-", -5, 'a'));
 	free(test);
 	return 0;
 }

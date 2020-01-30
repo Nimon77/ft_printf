@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/29 18:10:44 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/30 17:33:43 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,32 @@ int	is_flag(const char format)
 	return (0);
 }
 
-int	ft_getprec(const char *str, t_fill *fill)
+int	ft_getprec(const char *s, t_fill *fill, va_list *args)
 {
 	int	i;
+	int res;
 
-	i = 1;
-	while (ft_isdigit(str[i]) || str[i] == '.' || str[i] == '-')
+	i = 0;
+	while (ft_isdigit(s[++i]) || s[i] == '.' || s[i] == '-' || s[i] =='*')
 	{
-		if (str[i] == '-' || (str[i] == '0' && str[i - 1] == '%'))
-			fill->align = str[i];
-		if (!ft_isdigit(str[i - 1]) && str[i - 1] != '.')
-			fill->space = ft_atoi(&str[i]);
-		if (!ft_isdigit(str[i - 1]) && str[i - 1] == '.')
-			fill->zero = ft_atoi(&str[i]);
-		if (str[i] == '.' && fill->align == '0')
+		if (s[i] == '-' || (s[i] == '0' && s[i - 1] == '%'))
+			fill->align = s[i];
+		if (!ft_isdigit(s[i - 1]) && s[i - 1] != '.' && ft_isdigit(s[i]))
+			fill->space = ft_atoi(&s[i]);
+		if (!ft_isdigit(s[i - 1]) && s[i - 1] == '.' && ft_isdigit(s[i]))
+			fill->zero = ft_atoi(&s[i]);
+		if (s[i] == '*' && s[i - 1] != '.')
+		{
+			if ((res = va_arg(*args, int)) < 0)
+				fill->align = '-';
+			if (res < 0)
+				res *= -1;
+			fill->space = res;
+		}
+		if (s[i] == '*' && s[i - 1] == '.')
+			fill->zero = va_arg(*args, int);
+		if (s[i] == '.' && fill->align == '0')
 			fill->align = '\0';
-		i++;
 	}
 	return (i);
 }
@@ -70,7 +80,7 @@ int	ft_printf(const char *format, ...)
 	{
 		j = 0;
 		if (format[i] == '%')
-			j = ft_getprec(&format[i], &fill);
+			j = ft_getprec(&format[i], &fill, &args);
 		if (format[i] == '%' && (val = is_flag(format[i + j])))
 		{
 			val == 1 ? ft_printf_char(va_arg(args, int), &fill) : val;
