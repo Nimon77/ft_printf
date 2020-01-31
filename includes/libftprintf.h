@@ -22,8 +22,8 @@ typedef struct	s_fill
 {
 	char 		align;
 	int			printed;
-	size_t		space;
-	size_t		zero;
+	int			space;
+	int			zero;
 }				t_fill;
 
 void	ft_putchar_count(char c, t_fill *fill);

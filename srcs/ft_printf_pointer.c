@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 21:34:23 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/24 15:24:33 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/31 18:02:22 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	ft_pointer(void *ptr, t_fill *fill)
 {
 	unsigned long	test;
 	char			*conv;
-	size_t	i;
+	int				i;
 
 	test = ptr ? (uintptr_t)ptr : 0;
-	conv = convert_hex(test, 87);
-	i = ft_strlen(conv) + 2;
+	conv = fill->zero == 0 && test == 0 ? ft_strdup("") : convert_hex(test, 87);
+	i = (int)ft_strlen(conv) + 2;
 	if (fill->align != '-')
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
@@ -30,6 +30,6 @@ void	ft_pointer(void *ptr, t_fill *fill)
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
 	free(conv);
-	fill->space = 0;
-	fill->zero = 0;
+	fill->space = -1;
+	fill->zero = -1;
 }

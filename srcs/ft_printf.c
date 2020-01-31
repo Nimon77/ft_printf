@@ -6,13 +6,13 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/30 17:33:43 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/01/31 17:42:05 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	is_flag(const char format)
+int		is_flag(const char format)
 {
 	if (format == 'c')
 		return (1);
@@ -33,7 +33,7 @@ int	is_flag(const char format)
 	return (0);
 }
 
-int	ft_getprec(const char *s, t_fill *fill, va_list *args)
+int		ft_getprec(const char *s, t_fill *fill, va_list *args)
 {
 	int	i;
 	int res;
@@ -51,19 +51,18 @@ int	ft_getprec(const char *s, t_fill *fill, va_list *args)
 		{
 			if ((res = va_arg(*args, int)) < 0)
 				fill->align = '-';
-			if (res < 0)
-				res *= -1;
+			res < 0 ? res *= -1 : res;
 			fill->space = res;
 		}
-		if (s[i] == '*' && s[i - 1] == '.')
-			fill->zero = va_arg(*args, int);
-		if (s[i] == '.' && fill->align == '0')
-			fill->align = '\0';
+		(s[i] == '*' && s[i - 1] == '.') ? fill->zero = va_arg(*args, int) : *s;
+		(s[i] == '.' && fill->align == '0') ? fill->align = '\0' : *s;
+		if (s[i] == '.' && !ft_isdigit(s[i + 1]) && s[i + 1] != '*')
+			fill->zero = 0;
 	}
 	return (i);
 }
 
-int	ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	int			i;
 	int 		j;
@@ -73,8 +72,8 @@ int	ft_printf(const char *format, ...)
 
 	va_start(args, format);
 	i = 0;
-	fill.zero = 0;
-	fill.space = 0;
+	fill.zero = -1;
+	fill.space = -1;
 	fill.printed = 0;
 	while (format[i])
 	{
