@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 21:34:23 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/31 18:02:22 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/03 18:46:11 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ void	ft_pointer(void *ptr, t_fill *fill)
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
 	free(conv);
-	fill->space = -1;
-	fill->zero = -1;
+	ft_clear_struct(fill);
 }

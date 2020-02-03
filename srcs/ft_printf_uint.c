@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 15:47:30 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/31 17:26:22 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/03 18:48:31 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -60,8 +60,7 @@ void	ft_uint(unsigned int n, t_fill *fill)
 	if ((i = ft_strlen(value)) < fill->zero)
 		while (i++ < fill->zero)
 			ft_putchar_fd('0', 1);
-	fill->space = -1;
-	fill->zero = -1;
+	ft_clear_struct(fill);
 	ft_putstr_fd(value, 1);
 	free(value);
 }

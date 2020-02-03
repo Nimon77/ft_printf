@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/31 18:47:01 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/03 18:48:31 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	ft_printf_int(int val, t_fill *fill)
 	if (fill->align == '-')
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
-	fill->space = -1;
-	fill->zero = -1;
+	ft_clear_struct(fill);
 	free(*(value - 1) == '-' ? value - 1 : value);
 }
 
@@ -53,8 +52,7 @@ void	ft_printf_char(char c, t_fill *fill)
 	if (fill ->align == '-' && i < fill->space)
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
-	fill->space = -1;
-	fill->space = -1;
+	ft_clear_struct(fill);
 }
 
 void	ft_printf_str(const char *str, t_fill * fill)
@@ -74,8 +72,7 @@ void	ft_printf_str(const char *str, t_fill * fill)
 		while (i++ < fill->space - (int)ft_strlen(cpy_str))
 			ft_putchar_count(' ', fill);
 	free(cpy_str);
-	fill->space = -1;
-	fill->zero = -1;
+	ft_clear_struct(fill);
 }
 
 void	ft_hexa(int value, t_fill *fill, char charset)
@@ -90,8 +87,7 @@ void	ft_hexa(int value, t_fill *fill, char charset)
 	if ((i = ft_strlen(str)) < fill->zero)
 		while (i++ < fill->zero)
 			ft_putchar_count('0', fill);
-	fill->space = -1;
-	fill->zero = -1;
+	ft_clear_struct(fill);
 	ft_putstr_count(str, fill);
 	free(str);
 }

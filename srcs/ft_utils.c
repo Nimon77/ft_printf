@@ -23,3 +23,10 @@ void	ft_putstr_count(char *str, t_fill *fill)
 	ft_putstr_fd(str, 1);
 	fill->printed += ft_strlen(str);
 }
+
+void	ft_clear_struct(t_fill *fill)
+{
+	fill->align = 0;
+	fill->space = -1;
+	fill->zero = -1;
+}
