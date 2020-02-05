@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/05 18:06:11 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/05 19:06:07 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_printf_int(int val, t_fill *fill)
 {
 	char	*value;
 	int 	i;
-	int 	res;
 
 	value = ft_itoa(val);
 	i = val < 0 ? 1 : 0;
@@ -24,7 +23,6 @@ void	ft_printf_int(int val, t_fill *fill)
 	while (value[i] && val != 0)
 		ft_putchar_count(value[i++], fill);
 	val == 0 && fill->zero != 0 ? ft_putchar_count('0', fill) : 0;
-	fill->space -= res;
 	if (fill->align == '-' && fill->space > 0)
 		while (fill->space-- > 0)
 			ft_putchar_count(' ', fill);

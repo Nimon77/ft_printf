@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/05 14:52:31 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/05 19:32:54 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,11 @@ int		ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		j = 0;
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1] != '%')
 			j = ft_getprec(&format[i], &fill, &args);
+		if (format[i] == '%' && format[i + 1] == '%')
+			ft_putchar_count(format[i], &fill);
+		format[i] == '%' && format[i + 1] == '%' ? i += 2 : 0;
 		if (format[i] == '%' && (val = is_flag(format[i + j])))
 		{
 			val == 1 ? ft_printf_char(va_arg(args, int), &fill) : 0;
