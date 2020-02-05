@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/31 17:42:05 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/05 14:52:31 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_getprec(const char *s, t_fill *fill, va_list *args)
 			fill->space = res;
 		}
 		(s[i] == '*' && s[i - 1] == '.') ? fill->zero = va_arg(*args, int) : *s;
-		(s[i] == '.' && fill->align == '0') ? fill->align = '\0' : *s;
+		//(s[i] == '.' && fill->align == '0') ? fill->align = '\0' : *s;
 		if (s[i] == '.' && !ft_isdigit(s[i + 1]) && s[i + 1] != '*')
 			fill->zero = 0;
 	}
@@ -72,6 +72,7 @@ int		ft_printf(const char *format, ...)
 
 	va_start(args, format);
 	i = 0;
+	fill.align = 0;
 	fill.zero = -1;
 	fill.space = -1;
 	fill.printed = 0;
@@ -82,13 +83,13 @@ int		ft_printf(const char *format, ...)
 			j = ft_getprec(&format[i], &fill, &args);
 		if (format[i] == '%' && (val = is_flag(format[i + j])))
 		{
-			val == 1 ? ft_printf_char(va_arg(args, int), &fill) : val;
-			val == 2 ? ft_printf_str(va_arg(args, char *), &fill) : val;
-			val == 3 ? ft_pointer(va_arg(args, void *), &fill) : val;
-			val == 4 ? ft_printf_int(va_arg(args, int), &fill) : val;
-			val == 5 ? ft_uint(va_arg(args, unsigned int), &fill) : val;
-			val == 6 ? ft_hexa(va_arg(args, int), &fill, 87) : val;
-			val == 7 ? ft_hexa(va_arg(args, int), &fill, 55) : val;
+			val == 1 ? ft_printf_char(va_arg(args, int), &fill) : 0;
+			val == 2 ? ft_printf_str(va_arg(args, char *), &fill) : 0;
+			val == 3 ? ft_pointer(va_arg(args, void *), &fill) : 0;
+			val == 4 ? ft_printf_int(va_arg(args, int), &fill) : 0;
+			val == 5 ? ft_uint(va_arg(args, unsigned int), &fill) : 0;
+			val == 6 ? ft_hexa(va_arg(args, int), &fill, 87) : 0;
+			val == 7 ? ft_hexa(va_arg(args, int), &fill, 55) : 0;
 			i += j + 1;
 		}
 		if (format[i] != '%' && format[i])

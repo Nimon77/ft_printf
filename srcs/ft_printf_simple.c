@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/03 18:48:31 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/05 18:06:11 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,22 @@
 
 void	ft_printf_int(int val, t_fill *fill)
 {
-	int		i;
-	int		j;
 	char	*value;
+	int 	i;
+	int 	res;
 
 	value = ft_itoa(val);
-	i = (int)(*value == '-' ? ft_strlen(value) - 1 : ft_strlen(value));
-	j = fill->zero - (*value == '-' ? ft_strlen(value) - 1 : ft_strlen(value));
-	if (fill->align == '\0')
-		while (i++ < fill->space - (j < 0 ? 0 : j))
-			ft_putchar_count(' ', fill);
-	*value == '-' ? ft_putchar_count(*value++, fill) : value;
-	if (fill->align == '0')
-		while (i++ < fill->space - (j < 0 ? 0 : j))
-			ft_putchar_count('0', fill);
-	i = 0;
-	while (i++ < (j < 0 ? 0 : j))
-		ft_putchar_count('0', fill);
-	ft_putstr_count(value, fill);
-	i += ft_strlen(value);
-	if (fill->align == '-')
-		while (i++ < fill->space)
+	i = val < 0 ? 1 : 0;
+	ft_print_flag_i(ft_strlen(value), fill, val);
+	while (value[i] && val != 0)
+		ft_putchar_count(value[i++], fill);
+	val == 0 && fill->zero != 0 ? ft_putchar_count('0', fill) : 0;
+	fill->space -= res;
+	if (fill->align == '-' && fill->space > 0)
+		while (fill->space-- > 0)
 			ft_putchar_count(' ', fill);
 	ft_clear_struct(fill);
-	free(*(value - 1) == '-' ? value - 1 : value);
+	free(value);
 }
 
 void	ft_printf_char(char c, t_fill *fill)
