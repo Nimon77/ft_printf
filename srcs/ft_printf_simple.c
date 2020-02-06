@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/05 19:06:07 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/06 16:29:31 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,12 @@ void	ft_printf_str(const char *str, t_fill * fill)
 	cpy_str = str ? ft_strdup(str) : ft_strdup("(null)");
 	if (fill->zero < (int)ft_strlen(cpy_str) && fill->zero >= 0)
 		cpy_str[fill->zero] = '\0';
-	if (fill->align != '-')
+	if (fill->align != '-' && fill->align != '0')
 		while (i++ < fill->space - (int)ft_strlen(cpy_str))
 			ft_putchar_count(' ', fill);
+	if (fill->align == '0')
+		while (i++ < fill->space - (int)ft_strlen(cpy_str))
+			ft_putchar_count('0', fill);
 	ft_putstr_count(cpy_str, fill);
 	if (fill->align == '-')
 		while (i++ < fill->space - (int)ft_strlen(cpy_str))
@@ -65,19 +68,34 @@ void	ft_printf_str(const char *str, t_fill * fill)
 	ft_clear_struct(fill);
 }
 
-void	ft_hexa(int value, t_fill *fill, char charset)
+void	ft_hexa(long value, t_fill *fill, char charset)
 {
-	int		i;
 	char	*str;
 
 	str = convert_hex(value, charset);
-	if ((i = ft_strlen(str) + (fill->zero - ft_strlen(str))) < fill->space)
-		while (i++ < fill->space)
+	ft_print_flag_x(ft_strlen(str), fill, value);
+	if (fill->align == '-' && fill->space > 0)
+		while (fill->space-- > 0)
 			ft_putchar_count(' ', fill);
-	if ((i = ft_strlen(str)) < fill->zero)
-		while (i++ < fill->zero)
-			ft_putchar_count('0', fill);
 	ft_clear_struct(fill);
 	ft_putstr_count(str, fill);
 	free(str);
+}
+
+void	ft_pourcent(t_fill *fill)
+{
+	int i;
+
+	i = 1;
+	if (fill->align != '-' && i < fill->space && fill->align != '0')
+		while (i++ < fill->space)
+			ft_putchar_count(' ', fill);
+	if (fill->align == '0' && i< fill->space)
+		while (i++ < fill->space)
+			ft_putchar_count('0', fill);
+	ft_putchar_count('%', fill);
+	if (fill ->align == '-' && i < fill->space)
+		while (i++ < fill->space)
+			ft_putchar_count(' ', fill);
+	ft_clear_struct(fill);
 }

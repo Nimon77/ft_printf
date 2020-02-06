@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/05 19:32:54 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/06 16:51:12 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		is_flag(const char format)
 		return (6);
 	if (format == 'X')
 		return (7);
+	if (format == '%')
+		return (8);
 	return (0);
 }
 
@@ -55,7 +57,6 @@ int		ft_getprec(const char *s, t_fill *fill, va_list *args)
 			fill->space = res;
 		}
 		(s[i] == '*' && s[i - 1] == '.') ? fill->zero = va_arg(*args, int) : *s;
-		//(s[i] == '.' && fill->align == '0') ? fill->align = '\0' : *s;
 		if (s[i] == '.' && !ft_isdigit(s[i + 1]) && s[i + 1] != '*')
 			fill->zero = 0;
 	}
@@ -79,11 +80,8 @@ int		ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		j = 0;
-		if (format[i] == '%' && format[i + 1] != '%')
+		if (format[i] == '%')
 			j = ft_getprec(&format[i], &fill, &args);
-		if (format[i] == '%' && format[i + 1] == '%')
-			ft_putchar_count(format[i], &fill);
-		format[i] == '%' && format[i + 1] == '%' ? i += 2 : 0;
 		if (format[i] == '%' && (val = is_flag(format[i + j])))
 		{
 			val == 1 ? ft_printf_char(va_arg(args, int), &fill) : 0;
@@ -91,11 +89,13 @@ int		ft_printf(const char *format, ...)
 			val == 3 ? ft_pointer(va_arg(args, void *), &fill) : 0;
 			val == 4 ? ft_printf_int(va_arg(args, int), &fill) : 0;
 			val == 5 ? ft_uint(va_arg(args, unsigned int), &fill) : 0;
-			val == 6 ? ft_hexa(va_arg(args, int), &fill, 87) : 0;
-			val == 7 ? ft_hexa(va_arg(args, int), &fill, 55) : 0;
+			val == 6 ? ft_hexa(va_arg(args, long), &fill, 87) : 0;
+			val == 7 ? ft_hexa(va_arg(args, long), &fill, 55) : 0;
+			val == 8 ? ft_pourcent(&fill) : 0;
+			val = 0;
 			i += j + 1;
 		}
-		if (format[i] != '%' && format[i])
+		if (val == 0 && format[i] && (format[i] != '%' && !is_flag(format[i])))
 			ft_putchar_count(format[i++], &fill);
 	}
 	va_end(args);

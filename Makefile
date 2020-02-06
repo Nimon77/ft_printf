@@ -21,6 +21,7 @@ SRC_NAME =	ft_printf.c					\
 			ft_printf_uint.c			\
 			ft_printf_pointer.c			\
 			ft_hexa_converter.c			\
+			ft_flags.c					\
 			ft_utils.c
 
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))

@@ -21,10 +21,13 @@ void	ft_pointer(void *ptr, t_fill *fill)
 	test = ptr ? (uintptr_t)ptr : 0;
 	conv = fill->zero == 0 && test == 0 ? ft_strdup("") : convert_hex(test, 87);
 	i = (int)ft_strlen(conv) + 2;
-	if (fill->align != '-')
+	if (fill->align != '-' && fill->align != '0')
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
 	ft_putstr_count("0x", fill);
+	if (fill->align == '0')
+		while (i++ < fill->space)
+			ft_putchar_count('0', fill);
 	ft_putstr_count(conv, fill);
 	if (fill->align == '-')
 		while (i++ < fill->space)
