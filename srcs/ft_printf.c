@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/06 16:51:12 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/06 18:16:56 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int		ft_printf(const char *format, ...)
 			val == 6 ? ft_hexa(va_arg(args, long), &fill, 87) : 0;
 			val == 7 ? ft_hexa(va_arg(args, long), &fill, 55) : 0;
 			val == 8 ? ft_pourcent(&fill) : 0;
-			val = 0;
 			i += j + 1;
 		}
-		if (val == 0 && format[i] && (format[i] != '%' && !is_flag(format[i])))
+		if (format[i] != '%' && format[i] && val == 0)
 			ft_putchar_count(format[i++], &fill);
+		val = 0;
 	}
 	va_end(args);
 	return (fill.printed);

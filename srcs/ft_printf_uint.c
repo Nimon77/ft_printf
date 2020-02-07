@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 15:47:30 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/06 15:54:07 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/06 18:13:09 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -54,7 +54,7 @@ void	ft_uint(unsigned int n, t_fill *fill)
 
 	value = ft_itoa_unsigned(n);
 	ft_print_flag_u(ft_strlen(value), fill, n);
-	ft_putstr_count(value, fill);
+	fill->zero == 0 && n == 0 ? 0 : ft_putstr_count(value, fill);
 	if (fill->align == '-' && fill->space > 0)
 		while (fill->space-- > 0)
 			ft_putchar_count(' ', fill);
