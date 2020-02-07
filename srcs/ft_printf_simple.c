@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/06 16:29:31 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/07 14:16:23 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ void	ft_hexa(long value, t_fill *fill, char charset)
 
 	str = convert_hex(value, charset);
 	ft_print_flag_x(ft_strlen(str), fill, value);
+	fill->zero == 0 && value == 0 ? 0 : ft_putstr_count(str, fill);
 	if (fill->align == '-' && fill->space > 0)
 		while (fill->space-- > 0)
 			ft_putchar_count(' ', fill);
 	ft_clear_struct(fill);
-	ft_putstr_count(str, fill);
 	free(str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/06 18:16:56 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/07 13:17:33 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int		ft_printf(const char *format, ...)
 			val == 3 ? ft_pointer(va_arg(args, void *), &fill) : 0;
 			val == 4 ? ft_printf_int(va_arg(args, int), &fill) : 0;
 			val == 5 ? ft_uint(va_arg(args, unsigned int), &fill) : 0;
-			val == 6 ? ft_hexa(va_arg(args, long), &fill, 87) : 0;
-			val == 7 ? ft_hexa(va_arg(args, long), &fill, 55) : 0;
+			val == 6 ? ft_hexa(va_arg(args, unsigned int), &fill, 87) : 0;
+			val == 7 ? ft_hexa(va_arg(args, unsigned int), &fill, 55) : 0;
 			val == 8 ? ft_pourcent(&fill) : 0;
 			i += j + 1;
 		}

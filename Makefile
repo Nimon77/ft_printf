@@ -32,7 +32,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
-LBPATH = ../libft/
+LBPATH = ./libft/
 
 LDFLAGS = -L$(LBPATH)
 
