@@ -6,9 +6,10 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 15:47:30 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/07 13:17:33 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/17 15:21:56 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libftprintf.h"
 
 static void	ft_strrcpy(char *value, char *tmp)
@@ -48,7 +49,7 @@ static char	*ft_itoa_unsigned(unsigned int n)
 	return (value);
 }
 
-void	ft_uint(unsigned int n, t_fill *fill)
+void		ft_uint(unsigned int n, t_fill *fill)
 {
 	char			*value;
 

@@ -6,13 +6,13 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 02:40:21 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/12 14:51:12 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/17 15:21:15 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static char *ft_reverse(char *conv)
+static char	*ft_reverse(char *conv)
 {
 	int		i;
 	int		size;
@@ -29,7 +29,7 @@ static char *ft_reverse(char *conv)
 	return (tmp);
 }
 
-char	*convert_hex(unsigned long value, char charset)
+char		*convert_hex(unsigned long value, char charset)
 {
 	int		val;
 	char	actuel[2];

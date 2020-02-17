@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/12 14:57:49 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/17 15:46:58 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		ft_getprec(const char *s, t_fill *fill, va_list *args)
 	int res;
 
 	i = 0;
-	while (ft_isdigit(s[++i]) || s[i] == '.' || s[i] == '-' || s[i] =='*')
+	while (ft_isdigit(s[++i]) || s[i] == '.' || s[i] == '-' || s[i] == '*')
 	{
 		if (s[i] == '-' || (s[i] == '0' && s[i - 1] == '%'))
 			fill->align = s[i];
@@ -63,7 +63,7 @@ int		ft_getprec(const char *s, t_fill *fill, va_list *args)
 	return (i);
 }
 
-void	ft_select(int val, va_list *args, t_fill *fill, int *i, int j)
+void	ft_select(int val, va_list *args, t_fill *fill, int *tab)
 {
 	val == 1 ? ft_printf_char(va_arg(*args, int), fill) : 0;
 	val == 2 ? ft_printf_str(va_arg(*args, char *), fill) : 0;
@@ -73,33 +73,31 @@ void	ft_select(int val, va_list *args, t_fill *fill, int *i, int j)
 	val == 6 ? ft_hexa(va_arg(*args, unsigned int), fill, 87) : 0;
 	val == 7 ? ft_hexa(va_arg(*args, unsigned int), fill, 55) : 0;
 	val == 8 ? ft_pourcent(fill) : 0;
-	*i += j + 1;
+	tab[0] += tab[1] + 1;
 }
 
 int		ft_printf(const char *format, ...)
 {
-	int			i;
-	int 		j;
-	int			val;
+	int			tb[3];
 	va_list		args;
-	t_fill	fill;
+	t_fill		fill;
 
 	va_start(args, format);
-	i = 0;
+	tb[0] = 0;
 	fill.align = 0;
 	fill.zero = -1;
 	fill.space = -1;
 	fill.printed = 0;
-	while (format[i])
+	while (format[tb[0]])
 	{
-		j = 0;
-		if (format[i] == '%')
-			j = ft_getprec(&format[i], &fill, &args);
-		if (format[i] == '%' && (val = is_flag(format[i + j])))
-			ft_select(val, &args, &fill, &i, j);
-		if (format[i] != '%' && format[i] && val == 0)
-			ft_putchar_count(format[i++], &fill);
-		val = 0;
+		tb[1] = 0;
+		if (format[tb[0]] == '%')
+			tb[1] = ft_getprec(&format[tb[0]], &fill, &args);
+		if (format[tb[0]] == '%' && (tb[2] = is_flag(format[tb[0] + tb[1]])))
+			ft_select(tb[2], &args, &fill, tb);
+		if (format[tb[0]] != '%' && format[tb[0]] && tb[2] == 0)
+			ft_putchar_count(format[tb[0]++], &fill);
+		tb[2] = 0;
 	}
 	va_end(args);
 	return (fill.printed);

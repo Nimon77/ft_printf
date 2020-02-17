@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:37:47 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/07 14:16:23 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/17 15:36:56 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_printf_int(int val, t_fill *fill)
 {
 	char	*value;
-	int 	i;
+	int		i;
 
 	value = ft_itoa(val);
 	i = val < 0 ? 1 : 0;
@@ -39,15 +39,15 @@ void	ft_printf_char(char c, t_fill *fill)
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
 	ft_putchar_count(c, fill);
-	if (fill ->align == '-' && i < fill->space)
+	if (fill->align == '-' && i < fill->space)
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
 	ft_clear_struct(fill);
 }
 
-void	ft_printf_str(const char *str, t_fill * fill)
+void	ft_printf_str(const char *str, t_fill *fill)
 {
-	char 	*cpy_str;
+	char	*cpy_str;
 	int		i;
 
 	i = 0;
@@ -90,11 +90,11 @@ void	ft_pourcent(t_fill *fill)
 	if (fill->align != '-' && i < fill->space && fill->align != '0')
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
-	if (fill->align == '0' && i< fill->space)
+	if (fill->align == '0' && i < fill->space)
 		while (i++ < fill->space)
 			ft_putchar_count('0', fill);
 	ft_putchar_count('%', fill);
-	if (fill ->align == '-' && i < fill->space)
+	if (fill->align == '-' && i < fill->space)
 		while (i++ < fill->space)
 			ft_putchar_count(' ', fill);
 	ft_clear_struct(fill);
