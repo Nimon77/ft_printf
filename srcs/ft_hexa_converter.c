@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 02:40:21 by nsimon            #+#    #+#             */
-/*   Updated: 2020/01/24 15:36:33 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/12 14:51:12 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ char	*convert_hex(unsigned long value, char charset)
 	char	*conv;
 	char	*tmp;
 
-	if (!(conv = (char *)malloc(sizeof(*conv))))
-		return (NULL);
-	conv[0] = '\0';
+	conv = ft_strdup("");
 	actuel[1] = '\0';
 	while (value > 0)
 	{
