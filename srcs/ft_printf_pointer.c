@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 21:34:23 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/19 00:32:46 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/20 00:53:25 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_pointer(void *ptr, t_fill *fill)
 		while (i++ < fill->space)
 			ftpcharcnt('0', fill);
 	if (fill->align != '-' && fill->align != '0')
-		while (i++ <= fill->zero +2)
+		while (i++ <= fill->zero + 2)
 			ftpcharcnt('0', fill);
 	ft_putstr_count(conv, fill);
 	if (fill->align == '-')
