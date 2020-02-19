@@ -34,11 +34,11 @@ void	ft_print_flag_i(int size, t_fill *fill, int val)
 	fill->space = val == 0 && fill->zero == 0 ? fill->space + 1 : fill->space;
 	if (fill->align != '-' && fill->space > 0)
 		while (fill->space-- > 0)
-			ft_putchar_count(' ', fill);
-	neg == 1 ? ft_putchar_count('-', fill) : 0;
+			ftpcharcnt(' ', fill);
+	neg == 1 ? ftpcharcnt('-', fill) : 0;
 	if (zero > 0)
 		while (zero-- > 0)
-			ft_putchar_count('0', fill);
+			ftpcharcnt('0', fill);
 }
 
 void	ft_print_flag_u(int size, t_fill *fill, unsigned int val)
@@ -63,11 +63,11 @@ void	ft_print_flag_u(int size, t_fill *fill, unsigned int val)
 	fill->space = val == 0 && fill->zero == 0 ? fill->space + 1 : fill->space;
 	if (fill->align != '-' && fill->space > 0)
 		while (fill->space-- > 0)
-			ft_putchar_count(' ', fill);
-	neg == 1 ? ft_putchar_count('-', fill) : 0;
+			ftpcharcnt(' ', fill);
+	neg == 1 ? ftpcharcnt('-', fill) : 0;
 	if (zero > 0)
 		while (zero-- > 0)
-			ft_putchar_count('0', fill);
+			ftpcharcnt('0', fill);
 }
 
 void	ft_print_flag_x(int size, t_fill *fill, long val)
@@ -92,9 +92,9 @@ void	ft_print_flag_x(int size, t_fill *fill, long val)
 	fill->space = val == 0 && fill->zero == 0 ? fill->space + 1 : fill->space;
 	if (fill->align != '-' && fill->space > 0)
 		while (fill->space-- > 0)
-			ft_putchar_count(' ', fill);
-	neg == 1 ? ft_putchar_count('-', fill) : 0;
+			ftpcharcnt(' ', fill);
+	neg == 1 ? ftpcharcnt('-', fill) : 0;
 	if (zero > 0)
 		while (zero-- > 0)
-			ft_putchar_count('0', fill);
+			ftpcharcnt('0', fill);
 }

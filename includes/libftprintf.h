@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:09:35 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/17 16:46:26 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/19 01:04:22 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			ft_clear_struct(t_fill *fill);
 void			ft_print_flag_i(int size, t_fill *fill, int val);
 void			ft_print_flag_u(int size, t_fill *fill, unsigned int val);
 void			ft_print_flag_x(int size, t_fill *fill, long val);
-void			ft_putchar_count(char c, t_fill *fill);
+void			ftpcharcnt(char c, t_fill *fill);
 void			ft_putstr_count(char *str, t_fill *fill);
 void			ft_printf_int(int value, t_fill *fill);
 void			ft_printf_char(char c, t_fill *fill);

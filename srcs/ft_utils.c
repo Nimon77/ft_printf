@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-void	ft_putchar_count(char c, t_fill *fill)
+void	ftpcharcnt(char c, t_fill *fill)
 {
 	ft_putchar_fd(c, 1);
 	fill->printed++;

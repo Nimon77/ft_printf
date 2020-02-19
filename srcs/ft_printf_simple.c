@@ -21,11 +21,11 @@ void	ft_printf_int(int val, t_fill *fill)
 	i = val < 0 ? 1 : 0;
 	ft_print_flag_i(ft_strlen(value), fill, val);
 	while (value[i] && val != 0)
-		ft_putchar_count(value[i++], fill);
-	val == 0 && fill->zero != 0 ? ft_putchar_count('0', fill) : 0;
+		ftpcharcnt(value[i++], fill);
+	val == 0 && fill->zero != 0 ? ftpcharcnt('0', fill) : 0;
 	if (fill->align == '-' && fill->space > 0)
 		while (fill->space-- > 0)
-			ft_putchar_count(' ', fill);
+			ftpcharcnt(' ', fill);
 	ft_clear_struct(fill);
 	free(value);
 }
@@ -37,11 +37,11 @@ void	ft_printf_char(char c, t_fill *fill)
 	i = 1;
 	if (fill->align != '-' && i < fill->space)
 		while (i++ < fill->space)
-			ft_putchar_count(' ', fill);
-	ft_putchar_count(c, fill);
+			ftpcharcnt(' ', fill);
+	ftpcharcnt(c, fill);
 	if (fill->align == '-' && i < fill->space)
 		while (i++ < fill->space)
-			ft_putchar_count(' ', fill);
+			ftpcharcnt(' ', fill);
 	ft_clear_struct(fill);
 }
 
@@ -56,14 +56,14 @@ void	ft_printf_str(const char *str, t_fill *fill)
 		cpy_str[fill->zero] = '\0';
 	if (fill->align != '-' && fill->align != '0')
 		while (i++ < fill->space - (int)ft_strlen(cpy_str))
-			ft_putchar_count(' ', fill);
+			ftpcharcnt(' ', fill);
 	if (fill->align == '0')
 		while (i++ < fill->space - (int)ft_strlen(cpy_str))
-			ft_putchar_count('0', fill);
+			ftpcharcnt('0', fill);
 	ft_putstr_count(cpy_str, fill);
 	if (fill->align == '-')
 		while (i++ < fill->space - (int)ft_strlen(cpy_str))
-			ft_putchar_count(' ', fill);
+			ftpcharcnt(' ', fill);
 	free(cpy_str);
 	ft_clear_struct(fill);
 }
@@ -77,7 +77,7 @@ void	ft_hexa(long value, t_fill *fill, char charset)
 	fill->zero == 0 && value == 0 ? 0 : ft_putstr_count(str, fill);
 	if (fill->align == '-' && fill->space > 0)
 		while (fill->space-- > 0)
-			ft_putchar_count(' ', fill);
+			ftpcharcnt(' ', fill);
 	ft_clear_struct(fill);
 	free(str);
 }
@@ -89,13 +89,13 @@ void	ft_pourcent(t_fill *fill)
 	i = 1;
 	if (fill->align != '-' && i < fill->space && fill->align != '0')
 		while (i++ < fill->space)
-			ft_putchar_count(' ', fill);
+			ftpcharcnt(' ', fill);
 	if (fill->align == '0' && i < fill->space)
 		while (i++ < fill->space)
-			ft_putchar_count('0', fill);
-	ft_putchar_count('%', fill);
+			ftpcharcnt('0', fill);
+	ftpcharcnt('%', fill);
 	if (fill->align == '-' && i < fill->space)
 		while (i++ < fill->space)
-			ft_putchar_count(' ', fill);
+			ftpcharcnt(' ', fill);
 	ft_clear_struct(fill);
 }

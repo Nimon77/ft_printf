@@ -6,7 +6,7 @@
 #    By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/29 17:07:11 by nsimon            #+#    #+#              #
-#    Updated: 2020/02/03 12:42:51 by nsimon           ###   ########.fr        #
+#    Updated: 2020/02/19 00:56:36 by nsimon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C $(LBPATH)
 	@echo "\033[34mCreation of $(NAME) ...\033[0m"
-	@ar rc $(TEMP) $(OBJ)
-	@libtool -static -o $(NAME) $(TEMP) $(LIB)
+	@cp $(LIB) $(NAME)
+	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 	@echo "\033[32m$(NAME) created\n\033[0m"
 

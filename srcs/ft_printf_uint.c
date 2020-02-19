@@ -58,7 +58,7 @@ void		ft_uint(unsigned int n, t_fill *fill)
 	fill->zero == 0 && n == 0 ? 0 : ft_putstr_count(value, fill);
 	if (fill->align == '-' && fill->space > 0)
 		while (fill->space-- > 0)
-			ft_putchar_count(' ', fill);
+			ftpcharcnt(' ', fill);
 	ft_clear_struct(fill);
 	free(value);
 }

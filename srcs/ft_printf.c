@@ -6,7 +6,7 @@
 /*   By: nsimon <nsimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:32:25 by nsimon            #+#    #+#             */
-/*   Updated: 2020/02/17 15:46:58 by nsimon           ###   ########.fr       */
+/*   Updated: 2020/02/19 00:19:24 by nsimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ int		ft_printf(const char *format, ...)
 			tb[1] = ft_getprec(&format[tb[0]], &fill, &args);
 		if (format[tb[0]] == '%' && (tb[2] = is_flag(format[tb[0] + tb[1]])))
 			ft_select(tb[2], &args, &fill, tb);
-		if (format[tb[0]] != '%' && format[tb[0]] && tb[2] == 0)
-			ft_putchar_count(format[tb[0]++], &fill);
+		if ((format[tb[0]] != '%' || is_flag(format[tb[0] + 1]) == 0)
+				&& format[tb[0]] && tb[2] == 0)
+			format[tb[0]] != '%' ? ftpcharcnt(format[tb[0]++], &fill) : tb[0]++;
 		tb[2] = 0;
 	}
 	va_end(args);
